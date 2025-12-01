@@ -40,7 +40,7 @@ export class WeatherComponent implements OnInit {
   error = signal<string | null>(null);
 
   ngOnInit() {
-    fetch('https://localhost:5001/weatherforecast')
+    fetch('http://localhost:8787/weatherforecast')
       .then(res => {
         if (!res.ok) throw new Error('Server error: ' + res.status);
         return res.json();

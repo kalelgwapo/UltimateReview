@@ -1,6 +1,8 @@
 import { Routes } from '@angular/router';
-import { WeatherComponent } from './weather.component';
 
 export const routes: Routes = [
-  { path: 'weather', component: WeatherComponent }
+  {
+    path: 'weather',
+    loadComponent: () => import('./weather.component').then(m => m.WeatherComponent)
+  }
 ];

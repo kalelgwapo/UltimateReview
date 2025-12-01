@@ -2,44 +2,38 @@
 
 ## Development: Running Locally
 
-### 1. Start the .NET Backend
+### Backend: Cloudflare Worker
 
-From your project root directory, run:
+1. From the project root, start the Worker:
+   ```bash
+   cd ultimate-review-worker
+   npm run dev
+   ```
+2. Wrangler serves it at http://localhost:8787 (and http://127.0.0.1:8787).
+3. The Worker exposes `/weatherforecast` with mock data and CORS allows the Angular app to call it.
 
+### Frontend: Angular
+
+1. In another terminal:
+   ```bash
+   cd UltimateReview.Ui
+   npx ng serve --port 4200
+   ```
+2. Open http://localhost:4200 (or http://127.0.0.1:4200).
+3. Click **Weather Forecast (Cloudflare Worker API)** to load data from the Worker.
+
+### Historical (Optional): .NET Backend
+
+The original .NET 9 WebAPI project remains in `UltimateReview.Api`. To run it:
 ```bash
 dotnet run --project UltimateReview.Api
 ```
-- The Web API will typically be available at:
-  - https://localhost:5001
-  - (Alternate: http://localhost:5000)
-
----
-
-### 2. Start the Angular Frontend
-
-Open a new terminal, then:
-
-```bash
-cd UltimateReview.Ui
-npx ng serve --port 4200
-```
-- The Angular app will be available at: http://localhost:4200
-- It may open automatically in your browser; otherwise, visit the URL manually.
-
----
-
-### 3. Use the Integrated Application
-
-- Open [http://localhost:4200](http://localhost:4200) in your browser.
-- Click the "Weather Forecast (from .NET API)" link to see live data from the backend.
-
----
+It usually listens on https://localhost:5001.
 
 ### Troubleshooting
 
-- Make sure both servers are actually running and that you allow self-signed certificates for `https://localhost:5001` in your browser if prompted.
-- If you encounter CORS or connection issues, double-check that the ports match these instructions and that both the backend and frontend are up.
+- Ensure both dev servers are running before testing the link.
+- If the table shows an error, check the browser console for CORS/network problems.
+- Match the Worker URL (`localhost` vs `127.0.0.1`) with the Angular origin when testing.
 
----
-
-Feel free to ask for additional instructions for production, deployment, or automation!
+Need production/deployment help? Just ask (Cloudflare Workers publish, Angular hosting, D1/KV setup, etc.).
